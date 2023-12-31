@@ -1,29 +1,21 @@
-import { Routes, Route } from "react-router-dom";
-import "./App.css";
-import AuthRoutes from "./routes/auth.routes";
-import Users from "./components/Users";
-import ProtectedRoutes from "./routes/auth.routes";
+import 'devextreme/dist/css/dx.dark.css';
+import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import Users from './components/Users/Users';
+import Login from './components/Login/Login';
+import PrivateRoute from './routes/private.route';
 
-function App() {
+const App = () => {
   return (
     <>
       <Routes>
-        {/* {AuthRoutes} */}
-        {/* <Route
-          exact
-          path="/users"
-          render={() => (isLoggedIn() ? <Redirect to="/login" /> : <Users />)}
-        /> */}
-        <Route element={<ProtectedRoutes />}>
-          <Route path="/users" element={<Users />} />
+        <Route exact path="/" element={<PrivateRoute />}>
+          <Route exact path="/users" element={<Users />} />
         </Route>
+        <Route exact path="/login" element={<Login />} />
       </Routes>
     </>
   );
-}
-
-const isLoggedIn = () => {
-  return true;
 };
 
 export default App;
